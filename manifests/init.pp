@@ -42,7 +42,15 @@
 #
 # Copyright 2017 Your name here, unless otherwise noted.
 #
-class sssd {
-
-
+class sssd (
+  String $package_name        = $sssd::params::package_name,
+  String $package_ensure      = $sssd::params::package_ensure,
+  String $service_ensure      = $sssd::params::service_ensure,
+  String $service_name        = $sssd::params::serivce_name,
+  Boolean $service_enable     = $sssd::params::service_enable,
+  Boolean $service_hasrestart = $sssd::params::service_hasrestart,
+  Boolean $service_hasstatus  = $sssd::params::service_hasstatus,
+) inherits ::sssd::params  {
+  class { '::sssd::install': }
+  ~> class { '::sssd::service': }
 }
